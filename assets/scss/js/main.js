@@ -127,17 +127,18 @@ function checkDomainUrl(str) {
  * В данном задании требуется использовать метод match().
  */
 function createLinksFromDomains(str) {
-  const reg = /https?:\/\/([a-zA-Z0-9-_]*\.([a-zA-Z0-9-_]+\.)*[a-z]{2,4})/gi
+  const reg = /(https?:\/\/)?([a-zA-Z0-9-_]*\.([a-zA-Z0-9-_]+\.)*[a-z]{2,4})/gi
   const strReg = str.match(reg)
   let result = null
+  let str1 = str
   strReg.forEach(element => {
-    result = str.replace(element, `<a href="${element}" target="_blank">${element.replace(reg, '$1')}</a>`)
-    str = result
+    result = str1.replace(element, `<a href="${element}" target="_blank">${element.replace(reg, '$2')}</a>`)
+    str1 = result
   })
   return result
 }
 // createLinksFromDomains('http://site.ua text1 https://site.com text2 https://site.com.ua text3 https://subdomain.my-site.com.ua text4')
 //<a href="http://site.ua">site.ua</a> text1 < a href = "https://site.com" > site.com</ > text2 < a href = "https://site.com.ua" > site.com.ua</ > text3 < a href = "https://subdomain.my-site.com.ua" > subdomain.my - site.com.ua</a > text4
-// console.log(createLinksFromDomains('http://site.ua text1 https://site.com text2 https://site.com.ua text3 https://subdomain.my-site.com.ua text4'));
-// //site.ua text1 < a href = "https://site.com" > site.com</ > text2 < a href = "https://site.com.ua" > site.com.ua</ > text3 subdomain.my - site.com.ua text4
-// console.log(createLinksFromDomains('site.ua text1 https://site.com text2 https://site.com.ua text3 subdomain.my-site.com.ua text4'));
+console.log(createLinksFromDomains('http://site.ua text1 https://site.com text2 https://site.com.ua text3 https://subdomain.my-site.com.ua text4'));
+//site.ua text1 < a href = "https://site.com" > site.com</ > text2 < a href = "https://site.com.ua" > site.com.ua</ > text3 subdomain.my - site.com.ua text4
+console.log(createLinksFromDomains('site.ua text1 https://site.com text2 https://site.com.ua text3 subdomain.my-site.com.ua text4'));
